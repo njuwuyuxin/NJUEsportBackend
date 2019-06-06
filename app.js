@@ -1,11 +1,26 @@
 var test = require('./test');
 var fs = require('fs');
-//var newsApi = require('./newsApi');
 var express = require('express');
 var https = require('https');
 var njuesportsql = require('./njuesportsql');
 var newsApi = require('./newsApi');
 var app = express();
+
+
+var env = "release";
+var config = {};
+
+
+var args = process.argv;
+if(args.length==3&&args[2]=='--staging'){
+    env = "staging";
+    config = JSON.parse(fs.readFileSync("./config/staging.conf"));
+}
+else{
+    env = "release";
+    config = JSON.parse(fs.readFileSync("./config/release.conf"));
+}
+console.log("env = " + env);
 
 app.all('*', function(req,res,next){
     res.header("Access-Control-Allow-Origin", "*");
@@ -22,13 +37,14 @@ app.get('/api/activityCards',newsApi.getActivityCards);
 app.get('/api/reviewCards',newsApi.getReviewCards);
 
 var options = {
-    key: fs.readFileSync('/root/lnmp1.3-full/certificate/Nginx/2_njuesport.club.key'),
-    cert: fs.readFileSync('/root/lnmp1.3-full/certificate/Nginx/1_njuesport.club_bundle.crt')
+    key: fs.readFileSync(config.key),
+    cert: fs.readFileSync(config.certificate)
 }
 var httpsServer = https.createServer(options, app);
-httpsServer.listen(8030,function(){
-    console.log("Https server is running on: https://localhost:8030");
+httpsServer.listen(parseInt(config.port),function(){
+    console.log("Https server is running on: https://localhost:"+config.port);
 });
+
 
 //var server = app.listen(8020, function(){
 //    var host = server.address().address;

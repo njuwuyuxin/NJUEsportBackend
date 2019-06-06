@@ -1,9 +1,6 @@
 var mysql = require('mysql');
-var pool = mysql.createPool({
-    host     : 'localhost',
-    user     : 'root',
-    password : 'wyx199812@',
-    database : 'NJUESPORT'
-});
+var fs = require('fs');
+var sqlConfig = JSON.parse(fs.readFileSync("./config/mysql.conf"));
+var pool = mysql.createPool(sqlConfig);
 
 module.exports = pool;
