@@ -6,9 +6,30 @@ exports.getActivities = function(req, res){
     var queryStr = 'SELECT * FROM Activities ORDER BY id desc limit ' + index.toString() + ',10';
     //console.log(queryStr);
     sqlPool.query(queryStr,function(err,results,fields){
-    res.send(results);
+	res.send(results);
     });
 }
+
+exports.getActivityCards = function(req, res){
+    var result = [];
+    var displayNum = req.param('displayNum');
+    var queryStr = 'SELECT * FROM ActivityCards ORDER BY id desc limit ' + displayNum;
+    //console.log(queryStr);
+    sqlPool.query(queryStr,function(err,results,fields){
+        res.send(results);
+    });
+}
+
+exports.getReviewCards = function(req, res){
+    var result = [];
+    var displayNum = req.param('displayNum');
+    var queryStr = 'SELECT * FROM ReviewCards ORDER BY id desc limit ' + displayNum;
+    //console.log(queryStr);
+    sqlPool.query(queryStr,function(err,results,fields){
+        res.send(results);
+    });
+}
+
 
 exports.getTest = getTest;
 

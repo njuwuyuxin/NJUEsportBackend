@@ -18,6 +18,8 @@ app.all('*', function(req,res,next){
 app.get('/test1', test.test1);
 app.get('/test2', test.test2);
 app.get('/api/activities',newsApi.getActivities);
+app.get('/api/activityCards',newsApi.getActivityCards);
+app.get('/api/reviewCards',newsApi.getReviewCards);
 
 var options = {
     key: fs.readFileSync('/root/lnmp1.3-full/certificate/Nginx/2_njuesport.club.key'),
