@@ -6,6 +6,8 @@ exports.getActivities = function(req, res){
     var queryStr = 'SELECT * FROM Activities ORDER BY id desc limit ' + index.toString() + ',10';
     //console.log(queryStr);
     sqlPool.query(queryStr,function(err,results,fields){
+	for(var i=0;i<results.length;i++)
+	    results[i].date.setHours(results[i].date.getHours()+8);
 	res.send(results);
     });
 }

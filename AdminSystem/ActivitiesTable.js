@@ -7,6 +7,8 @@ exports.getActivitiesList = function(req,res){
     if(req.body.password == user.password){
         var queryStr = 'SELECT * FROM Activities'
         sqlPool.query(queryStr,function(err,results,fields){
+	    for(var i=0;i<results.length;i++)
+		results[i].date.setHours(results[i].date.getHours()+8);
 	    res.send(results);
 	});
     }
