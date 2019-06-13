@@ -14,7 +14,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "staging":"node app.js --staging",
-    "release":"pm2 start app.js"
+    "release":"pm2 start app.js",
+    "reload" :"pm2 stop app.js&&pm2 start app.js"
   },
   "repository": {
     "type": "git",
