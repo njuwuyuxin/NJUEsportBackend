@@ -5,6 +5,7 @@ var test = require('./test');
 var fs = require('fs');
 var njuesportsql = require('./njuesportsql');
 var newsApi = require('./newsApi');
+var bbsApi = require('./bbsApi');
 
 var adminEntry = require('./AdminSystem/entry');
 var activitiesTable = require('./AdminSystem/ActivitiesTable');
@@ -41,6 +42,9 @@ app.get('/test2', test.test2);
 app.get('/api/activities',newsApi.getActivities);
 app.get('/api/activityCards',newsApi.getActivityCards);
 app.get('/api/reviewCards',newsApi.getReviewCards);
+app.get('/api/bbsPost',bbsApi.getBBSPosts);	    //获取论坛好帖API
+app.get('/api/gameSalon',newsApi.getGameSalon);	    //获取首页游戏沙龙卡片API
+app.get('/api/otherActivities',newsApi.getOtherActivities);	    //获取首页其他活动卡片API
 
 app.get('/admin',adminEntry.adminIndex);
 app.post('/admin/getActivitiesList',activitiesTable.getActivitiesList);

@@ -32,6 +32,28 @@ exports.getReviewCards = function(req, res){
     });
 }
 
+//获取首页游戏沙龙卡片API
+exports.getGameSalon = function(req, res){
+    var result = [];
+    var displayNum = req.param('displayNum');
+    var queryStr = 'SELECT * FROM GameSalon ORDER BY id desc limit ' + 4;
+    //console.log(queryStr);
+    sqlPool.query(queryStr,function(err,results,fields){
+        res.send(results);
+    });
+}
+
+//获取首页其他活动卡片API
+exports.getOtherActivities = function(req, res){
+    var result = [];
+    var displayNum = req.param('displayNum');
+    var queryStr = 'SELECT * FROM OtherActivities ORDER BY id desc limit ' + 4;
+    //console.log(queryStr);
+    sqlPool.query(queryStr,function(err,results,fields){
+        res.send(results);
+    });
+}
+
 
 exports.getTest = getTest;
 
